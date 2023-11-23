@@ -67,3 +67,8 @@ export const RowTableData = styled.td`
 
   position: relative;
 `;
+
+export const TableDataColumn = styled(TableData)`
+  display: flex;
+  flex-direction: column;
+`;

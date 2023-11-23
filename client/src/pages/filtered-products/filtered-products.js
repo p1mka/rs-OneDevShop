@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCorrectPageName, request } from "../../utils";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Loader, ProductCard } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../../store/actions";
@@ -9,16 +9,12 @@ import styled from "styled-components";
 
 const FilteredProductsContainer = ({ className }) => {
   const params = useParams();
-  const location = useLocation();
+
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectIsLoading);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const {
-    state: { header = "" },
-  } = location;
 
   useEffect(() => {
     dispatch(setIsLoading(true));

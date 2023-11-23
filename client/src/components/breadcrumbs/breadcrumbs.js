@@ -11,18 +11,29 @@ const BreadcrumbsContainer = ({ className }) => {
   return (
     location.pathname !== "/" && (
       <div className={className}>
+        {location.pathname !== "/" && (
+          <span>
+            <Link to="/">Главная</Link>
+            <Icon id="la-arrow-right" size="14px" />
+          </span>
+        )}
         {pathnames.map((pathname, index) => {
           const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
           const isLast = index === pathnames.length - 1;
 
           return (
             <span key={pathname}>
-              <span>{!isLast && <Link to="/">Главная</Link>}</span>
-              <Icon id="la-arrow-right" />
+              {/* <Icon id="la-arrow-right" size="14px" /> */}
               {isLast ? (
-                <span>{getCorrectPageName(pathname)}</span>
+                getCorrectPageName(pathname)
               ) : (
-                <Link to={routeTo}>{getCorrectPageName(pathname)}</Link>
+                <Link to={routeTo}>
+                  <span>
+                    {" "}
+                    {getCorrectPageName(pathname)}
+                    <Icon id="la-arrow-right" size="14px" />
+                  </span>
+                </Link>
               )}
             </span>
           );
@@ -36,15 +47,18 @@ export const Breadcrumbs = styled(BreadcrumbsContainer)`
   display: flex;
   gap: 0.5rem;
   justify-content: center;
+  align-items: center;
   margin-top: 6rem;
+  font-size: 14px;
   font-family: rubik;
 
   & span {
     border-radius: 0.5rem;
-    background: #fff;
     padding: 0.25rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: 0.5rem;
   }
 `;

@@ -106,7 +106,7 @@ export const CategoryProductCard = styled(CategoryProductCardContainer)`
     display: flex;
   }
   & img {
-    max-width: 15rem;
+    min-width: 15rem;
     max-height: 15rem;
     object-fit: cover;
   }
@@ -124,7 +124,7 @@ export const CategoryProductCard = styled(CategoryProductCardContainer)`
     word-break: break-all;
     font-size: 14px;
     max-height: 150px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     max-width: 20rem;
   }
 
@@ -136,6 +136,5 @@ export const CategoryProductCard = styled(CategoryProductCardContainer)`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    // width: 10rem;
   }
 `;

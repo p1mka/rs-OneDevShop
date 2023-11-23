@@ -5,6 +5,12 @@ import { setOrders } from "./set-orders";
 export const getUserOrdersAsync = (userId) => async (dispatch) => {
   dispatch(setIsLoading(true));
   await request(`/orders/${userId}`)
-    .then(({ error, data }) => dispatch(setOrders(data)))
+    .then(({ error, data }) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      dispatch(setOrders(data));
+    })
     .finally(() => dispatch(setIsLoading(false)));
 };

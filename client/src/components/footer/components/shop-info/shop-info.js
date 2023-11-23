@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ShopInfoContainer = ({ className }) => {
   return (
     <div className={className}>
-      <span> О компании</span>
-      <span> Контакты</span>
-      <span> Статьи</span>
+      <Link to="/about"> О компании</Link>
+      <span> One Developer's Shop (c) 2023</span>
+      {/* <span> Статьи</span> */}
     </div>
   );
 };

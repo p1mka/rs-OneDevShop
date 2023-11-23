@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { request } from "../../../../../../utils";
 import { Loader, Table, TableHead } from "../../../../../../components";
 import { useDispatch } from "react-redux";
-import { OrderRow } from "./components/order-row/order-row";
+import { OrderRow } from "./components";
 import { removeOrderAsync } from "../../../../../../store/actions";
 
 export const OrdersPage = () => {
@@ -16,7 +16,7 @@ export const OrdersPage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    Promise.all([request("/orders"), request("/orders/statuses")])
+    Promise.all([request("/orderslist"), request("/orders/statuses")])
       .then(([ordersRes, statusesRes]) => {
         if (ordersRes.error || statusesRes.error) {
           console.error(ordersRes.error || statusesRes.error);

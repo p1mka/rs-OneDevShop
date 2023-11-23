@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const auth = require("./middlewares/auth");
 const ROLES = require("./constants/roles");
 const hasRole = require("./middlewares/has-role");
+const path = require("path");
 
 const {
   login,
@@ -52,8 +53,8 @@ const port = 3090;
 const app = express();
 
 app.set("views", "pages");
-
-app.use(express.static("../client/build"));
+app.use(express.static(path.join(__dirname, "../client/build")));
+// app.use(express.static("../client/build"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -211,7 +212,7 @@ app.delete(
   }
 );
 
-app.get("/orders", hasRole([ROLES.ADMIN]), async (req, res) => {
+app.get("/orderslist", hasRole([ROLES.ADMIN]), async (req, res) => {
   const ordersList = await Order.find().populate("userId");
 
   res.send({ error: null, data: mapOrders(ordersList) });
@@ -286,6 +287,13 @@ app.delete("/users/:id", hasRole([ROLES.ADMIN]), async (req, res) => {
   } catch (e) {
     res.send({ error: e, data: null });
   }
+});
+
+app.get("/*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    (err) => err && res.status(500).send(err)
+  );
 });
 
 mongoose

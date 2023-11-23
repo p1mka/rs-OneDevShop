@@ -3,21 +3,16 @@ import {
   Button,
   RowTableData,
   TableData,
+  TableDataColumn,
 } from "../../../../../../../../components";
 import { request } from "../../../../../../../../utils";
 import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../../../../../../../store/actions";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
-const TableDataColumn = styled(TableData)`
-  display: flex;
-  flex-direction: column;
-`;
 export const OrderRow = ({
   orderId,
   userLogin,
-  createdAt,
   products,
   onOrderRemove,
   status,

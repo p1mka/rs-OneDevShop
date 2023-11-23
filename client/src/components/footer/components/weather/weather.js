@@ -11,8 +11,8 @@ const WeatherContainer = ({ className }) => {
 
   useEffect(() => {
     try {
-      fetch(WEATHER_URL).then(({ main, name, weather, ...data }) => {
-        if (!main || !name || !weather || !data) {
+      fetch(WEATHER_URL).then(({ main, name, weather, cod }) => {
+        if (cod !== 200) {
           setError(`Ошибка загрузки погоды`);
           return;
         }

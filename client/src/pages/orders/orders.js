@@ -8,13 +8,16 @@ import { Loader } from "../../components";
 import { OrderCard } from "./components/order-card/order-card";
 import { ROLES } from "../../constants";
 import { Link, useMatch } from "react-router-dom";
+
 import styled from "styled-components";
 
 const OrdersContainer = ({ className }) => {
   const match = useMatch("/cabinet/my-orders");
   const isLoading = useSelector(selectIsLoading);
-  const orders = useSelector(selectOrders);
+
   const user = useSelector(selectUser);
+
+  const orders = useSelector(selectOrders);
 
   const currentOrders = match
     ? orders

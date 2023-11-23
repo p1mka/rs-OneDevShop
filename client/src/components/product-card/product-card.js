@@ -155,7 +155,7 @@ export const ProductCard = styled(ProductCardContainer)`
     align-items: flex-start;
     justify-content: flex-start;
     white-space: nowrap;
-    overflow: scroll;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
 

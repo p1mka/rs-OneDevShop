@@ -8,6 +8,7 @@ import {
   ModalWindow,
 } from "./components";
 import {
+  AboutCompany,
   Authorize,
   Cabinet,
   Cart,
@@ -105,6 +106,7 @@ function Shop() {
             path="/categories/*"
             element={<div>Страница не существует...</div>}
           />
+          <Route path="/about" element={<AboutCompany />} />
           <Route path="*" element={<div>Ошибка</div>} />
         </Routes>
       </Page>
