@@ -11,20 +11,25 @@ const WeatherContainer = ({ className }) => {
 
   useEffect(() => {
     try {
-      fetch(WEATHER_URL).then(({ main, name, weather, cod }) => {
-        if (cod !== 200) {
-          setError(`Ошибка загрузки погоды`);
-          return;
-        }
-        setTemp(Math.round(main?.temp));
-        setCity(name);
-        setWeather([weather[0]?.description, weather[0]?.icon]);
-      });
+      fetch(WEATHER_URL)
+        .then((res) => {
+          if (res.status !== 200) {
+            throw new Error("Ошибка загрузки погоды");
+          }
+          console.log(res);
+          return res.json();
+        })
+        .then(({ weather, main, name }) => {
+          setTemp(Math.round(main?.temp));
+          setCity(name);
+          setWeather([weather[0].description, weather[0].icon]);
+        });
     } catch (e) {
-      setError(e.message);
+      setError(e);
       return;
     }
   }, [setTemp]);
+
   return error ? (
     <div>{error}</div>
   ) : (

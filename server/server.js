@@ -53,8 +53,8 @@ const port = 3090;
 const app = express();
 
 app.set("views", "pages");
-app.use(express.static(path.join(__dirname, "../client/build")));
-// app.use(express.static("../client/build"));
+// app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static("../client/build"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -62,6 +62,13 @@ app.use(
     extended: true,
   })
 );
+
+app.get("//*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    (err) => err && res.status(500).send(err)
+  );
+});
 
 app.get("/products/categories", async (req, res) => {
   const categories = await getCategories();
@@ -131,9 +138,8 @@ app.get(`/products/:id`, async (req, res) => {
 
   res.send({ error: null, data: mapProduct(product) });
 });
-//////////////////
-app.use(auth); //
-////////////////
+
+app.use(auth);
 
 app.post("/products", hasRole([ROLES.ADMIN]), async (req, res) => {
   const updatedProducts = await addProduct(req.body.updatedProduct);
@@ -287,13 +293,6 @@ app.delete("/users/:id", hasRole([ROLES.ADMIN]), async (req, res) => {
   } catch (e) {
     res.send({ error: e, data: null });
   }
-});
-
-app.get("/*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../client/build/index.html"),
-    (err) => err && res.status(500).send(err)
-  );
 });
 
 mongoose

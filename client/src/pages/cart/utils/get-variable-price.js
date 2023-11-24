@@ -17,10 +17,15 @@ export const getVariablePrice = (products) => {
     return (acc += discountAmount);
   }, 0);
 
-  const priceWithoutDiscount = products.reduce(
-    (acc, product) => (acc + Number(product.price)) * product.productCount,
-    0
-  );
+  const getPriceWithoutDiscount = (products) => {
+    let totalPrice = 0;
+    for (let i = 0; i < products.length; i++) {
+      totalPrice += products[i].price * products[i].productCount;
+    }
+    return totalPrice;
+  };
+
+  const priceWithoutDiscount = getPriceWithoutDiscount(products);
 
   return { summaryPrice, summaryDiscount, priceWithoutDiscount };
 };

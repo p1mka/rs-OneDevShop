@@ -19,7 +19,8 @@ export const OrdersPage = () => {
     Promise.all([request("/orderslist"), request("/orders/statuses")])
       .then(([ordersRes, statusesRes]) => {
         if (ordersRes.error || statusesRes.error) {
-          console.error(ordersRes.error || statusesRes.error);
+          // console.error(ordersRes.error || statusesRes.error);
+          console.log(ordersRes);
         }
         setOrders(ordersRes.data);
         setStatuses(statusesRes.data);
