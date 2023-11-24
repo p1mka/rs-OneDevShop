@@ -16,7 +16,6 @@ const WeatherContainer = ({ className }) => {
           if (res.status !== 200) {
             throw new Error("Ошибка загрузки погоды");
           }
-          console.log(res);
           return res.json();
         })
         .then(({ weather, main, name }) => {

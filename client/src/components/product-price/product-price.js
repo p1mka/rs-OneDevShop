@@ -10,7 +10,7 @@ const ProductPriceContainer = ({ className, price, discount, ...props }) => {
     <div className={className} {...props}>
       {discount > 0 ? (
         <div className={cartMatch ? "cart-price" : "default-price"}>
-          {getPriceWithDiscount(price, discount)} ₽
+          {getPriceWithDiscount(price, discount).toFixed(2)} ₽
           <div className="old-price">{price}</div>
         </div>
       ) : (
